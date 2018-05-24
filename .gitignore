@@ -65,3 +65,4 @@ typings/
 
 # output
 index.js
+test/*.js
