@@ -1,0 +1,12 @@
+{
+  "name": "repeating-task-manager",
+  "version": "0.1.0",
+  "description": "Repeating task manager using tail recursion for Node.js",
+  "main": "index.js",
+  "repository": "git@github.com:kanziw/repeating-task-manager.git",
+  "author": "kanziw <kanziwoong@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^2.8.3"
+  }
+}
