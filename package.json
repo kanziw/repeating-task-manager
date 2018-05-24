@@ -7,6 +7,7 @@
   "author": "kanziw <kanziwoong@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^10.1.2",
     "typescript": "^2.8.3"
   }
 }
