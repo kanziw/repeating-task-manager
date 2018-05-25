@@ -27,8 +27,17 @@ export default class RepeatingTaskManager {
     return Promise.resolve(this.hashFn.has(task) && this.hashFn.get(task)!(options))
   }
 
+  public clear(task: string) {
+    const clearFn = this.clearFn.get(task)
+    if (clearFn) {
+      clearFn()
+      this.hashFn.delete(task)
+      this.clearFn.delete(task)
+    }
+  }
+
   public clearAll(): void {
-    this.clearFn.forEach((clearFunction: Function) => clearFunction())
+    this.hashFn.forEach((_, task: string) => this.clear(task))
   }
 
   public pause(): void { this.isPausing = true }
