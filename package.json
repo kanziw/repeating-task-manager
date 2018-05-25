@@ -1,6 +1,6 @@
 {
   "name": "repeating-task-manager",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Repeating task manager using tail recursion for Node.js",
   "main": "index.js",
   "scripts": {
