@@ -1,8 +1,6 @@
 import RepeatingTaskManager from '../'
 import { expect } from 'chai'
-import { delay } from './common'
-
-const onError = (ex: Error) => console.log('>> onError :', ex)
+import { delay, onError } from './common'
 
 describe('[ Register ]', function () {
   let rtm: RepeatingTaskManager
@@ -24,9 +22,9 @@ describe('[ Register ]', function () {
     expect(ret.length).eql(1)
   })
 
-  it('isRegister option should work.', async () => {
-    await rtm.register(task, 10, taskFn, { onError })
-    await delay(30)
+  it('isRegister is true at the first time(register).', async () => {
+    rtm.register(task, 10, taskFn, { onError })
+    await delay(100)
 
     expect(ret.length).above(1)
     expect(ret[ 0 ]).eql(true)
@@ -35,7 +33,7 @@ describe('[ Register ]', function () {
 
   it('Simple repeating task should work.', async () => {
     rtm.register(task, 10, taskFn, { onError })
-    await delay(30)
+    await delay(100)
 
     expect(ret.length).above(2)
   })
