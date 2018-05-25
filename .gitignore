@@ -64,5 +64,4 @@ typings/
 .idea
 
 # output
-index.js
-test/*.js
+**/*.js*

@@ -1,4 +1,4 @@
-import RepeatingTaskManager from '../'
+import RepeatingTaskManager, { getDuplicatedTaskKeyError } from '../'
 import { expect } from 'chai'
 import { delay, onError } from './common'
 
@@ -36,5 +36,10 @@ describe('[ Register ]', function () {
     await delay(100)
 
     expect(ret.length).above(2)
+  })
+
+  it('Can not register /w duplicated task key.', () => {
+    rtm.register(task, 10, taskFn, { onError })
+    expect(() => rtm.register(task, 10, taskFn, { onError })).to.throw(task)
   })
 })

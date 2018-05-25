@@ -5,6 +5,7 @@
     "lib": [
       "ES2015"
     ],
-    "strict": true
+    "strict": true,
+    "sourceMap": true
   }
 }

@@ -9,6 +9,10 @@ export default class RepeatingTaskManager {
     fn: TaskFunction,
     { onError = () => undefined }: RegisterOptions = {},
   ): void {
+    if (this.hashFn.has(task)) {
+      throw getDuplicatedTaskKeyError(task)
+    }
+
     const repeatTask = async (options: RepeatingTaskOptions) => {
       if (!this.isPausing) {
         try {
@@ -48,4 +52,8 @@ export default class RepeatingTaskManager {
     const timer = setTimeout(taskFunction, interval)
     this.clearFn.set(task, () => clearTimeout(timer))
   }
+}
+
+export function getDuplicatedTaskKeyError(task: string): Error {
+  return new Error(`Given task key [${task}] was duplicated.`)
 }
