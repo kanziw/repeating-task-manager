@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Repeating task manager using tail recursion for Node.js",
   "main": "index.js",
+  "typings": "@types/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "mocha",
