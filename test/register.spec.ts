@@ -40,6 +40,8 @@ describe('[ Register ]', function () {
 
   it('Can not register /w duplicated task key.', () => {
     rtm.register(task, 10, taskFn, { onError })
-    expect(() => rtm.register(task, 10, taskFn, { onError })).to.throw(task)
+
+    const err = getDuplicatedTaskKeyError(task)
+    expect(() => rtm.register(task, 10, taskFn, { onError })).to.throw(err.message)
   })
 })

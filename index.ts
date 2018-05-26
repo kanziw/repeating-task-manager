@@ -1,59 +1,66 @@
 export default class RepeatingTaskManager {
-  private isPausing = false
-  private hashFn = new Map<string, Function>()
-  private clearFn = new Map<string, Function>()
+  private dicFn = new Map<TaskID, Function>()
+  private dicClearFn = new Map<TaskID, Function>()
+  private dicPause = new Map<TaskID, boolean>()
 
   public register(
-    task: string,
+    taskId: TaskID,
     interval: number,
-    fn: TaskFunction,
+    taskFunction: TaskFunction,
     { onError = () => undefined }: RegisterOptions = {},
   ): void {
-    if (this.hashFn.has(task)) {
-      throw getDuplicatedTaskKeyError(task)
+    if (!taskId || this.dicFn.has(taskId)) {
+      throw getDuplicatedTaskKeyError(taskId)
     }
 
     const repeatTask = async (options: RepeatingTaskOptions) => {
-      if (!this.isPausing) {
+      if (!this.dicPause.get(taskId)) {
         try {
-          await Promise.resolve(fn(options))
+          await Promise.resolve(taskFunction(options))
         } catch (ex) {
           onError(ex)
         }
       }
-      this.doTaskAfter(task, () => repeatTask({ isRegister: false }), interval)
+      this.doTaskAfter(taskId, () => repeatTask({ isRegister: false }), interval)
     }
-    this.hashFn.set(task, fn)
-    this.doTaskAfter(task, () => repeatTask({ isRegister: true }), interval)
+    this.dicFn.set(taskId, taskFunction)
+    this.dicPause.set(taskId, false)
+    this.doTaskAfter(taskId, () => repeatTask({ isRegister: true }), interval)
   }
 
-  public execute = (task: string, options?: RepeatingTaskOptions): Promise<any> => {
-    return Promise.resolve(this.hashFn.has(task) && this.hashFn.get(task)!(options))
+  public execute = (taskId: TaskID, options?: RepeatingTaskOptions): Promise<any> => {
+    return Promise.resolve(this.dicFn.has(taskId) && this.dicFn.get(taskId)!(options))
   }
 
-  public clear(task: string) {
-    const clearFn = this.clearFn.get(task)
+  public clear(taskId: TaskID) {
+    const clearFn = this.dicClearFn.get(taskId)
     if (clearFn) {
       clearFn()
-      this.hashFn.delete(task)
-      this.clearFn.delete(task)
+      this.dicFn.delete(taskId)
+      this.dicClearFn.delete(taskId)
     }
   }
 
   public clearAll(): void {
-    this.hashFn.forEach((_, task: string) => this.clear(task))
+    this.dicFn.forEach((_, taskId: TaskID) => this.clear(taskId))
   }
 
-  public pause(): void { this.isPausing = true }
+  public pause(task?: string): void {
+    if (!task) {
+      this.dicPause.forEach((_, taskId: string) => this.pause(taskId))
+    } else if (this.dicPause.has(task)) {
+      this.dicPause.set(task, true)
+    }
+  }
 
-  public resume(): void { this.isPausing = false }
+  public resume(): void { }
 
-  private doTaskAfter(task: string, taskFunction: TaskFunction, interval: number): void {
+  private doTaskAfter(taskId: TaskID, taskFunction: TaskFunction, interval: number): void {
     const timer = setTimeout(taskFunction, interval)
-    this.clearFn.set(task, () => clearTimeout(timer))
+    this.dicClearFn.set(taskId, () => clearTimeout(timer))
   }
 }
 
-export function getDuplicatedTaskKeyError(task: string): Error {
-  return new Error(`Given task key [${task}] was duplicated.`)
+export function getDuplicatedTaskKeyError(taskId: TaskID): Error {
+  return new Error(`Given task key [${taskId}] was duplicated.`)
 }

@@ -13,3 +13,5 @@ interface RegisterOptions {
 interface onErrorFunction {
   (error: Error): void
 }
+
+type TaskID = string
