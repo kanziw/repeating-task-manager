@@ -45,15 +45,21 @@ export default class RepeatingTaskManager {
     this.dicFn.forEach((_, taskId: TaskID) => this.clear(taskId))
   }
 
-  public pause(task?: string): void {
-    if (!task) {
-      this.dicPause.forEach((_, taskId: string) => this.pause(taskId))
-    } else if (this.dicPause.has(task)) {
-      this.dicPause.set(task, true)
+  public pause(taskId?: TaskID): void {
+    if (!taskId) {
+      this.dicPause.forEach((_, taskId: TaskID) => this.pause(taskId))
+    } else if (this.dicPause.has(taskId)) {
+      this.dicPause.set(taskId, true)
     }
   }
 
-  public resume(): void { }
+  public resume(taskId?: TaskID): void {
+    if (!taskId) {
+      this.dicPause.forEach((_, taskId: TaskID) => this.resume(taskId))
+    } else if (this.dicPause.has(taskId)) {
+      this.dicPause.set(taskId, false)
+    }
+  }
 
   private doTaskAfter(taskId: TaskID, taskFunction: TaskFunction, interval: number): void {
     const timer = setTimeout(taskFunction, interval)
