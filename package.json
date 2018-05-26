@@ -10,10 +10,19 @@
     "build": "tsc",
     "pretest": "npm run build",
     "test": "mocha",
-    "version": "npm run build && npm publish"
+    "version": "npm run build"
   },
   "repository": "git@github.com:kanziw/repeating-task-manager.git",
   "author": "kanziw <kanziwoong@gmail.com>",
+  "homepage": "https://github.com/kanziw/repeating-task-manager/#readme",
+  "bugs": {
+    "url": "https://github.com/kanziw/repeating-task-manager/issues"
+  },
+  "keywords": [
+    "repeat",
+    "cron",
+    "tail-recursion"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.1.3",
