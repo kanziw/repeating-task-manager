@@ -79,12 +79,14 @@ setTimeout(() => rtm.clear(taskKey), 1000)
 
 
 ## rtm.pause
-> Pause all tasks.
+> Pause all tasks without param.
+> Pause task with taskId.
 
-### () => void
+### ([taskId]) => void
 
 
 ## rtm.resume
-> Resume all tasks.
+> Resume all tasks without param.
+> Resume task with taskId.
 
-### () => void
+### ([taskId]) => void

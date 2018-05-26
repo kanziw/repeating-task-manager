@@ -64,4 +64,5 @@ typings/
 .idea
 
 # output
-**/*.js*
+**/*.js
+**/*.js.map
