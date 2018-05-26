@@ -8,8 +8,9 @@
   },
   "scripts": {
     "build": "tsc",
+    "pretest": "npm run build",
     "test": "mocha",
-    "pretest": "npm run build"
+    "version": "npm run build && npm publish"
   },
   "repository": "git@github.com:kanziw/repeating-task-manager.git",
   "author": "kanziw <kanziwoong@gmail.com>",
