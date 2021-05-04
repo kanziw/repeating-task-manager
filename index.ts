@@ -1,3 +1,21 @@
+export interface TaskFunction {
+  (options: RepeatingTaskOptions): any
+}
+
+export interface RepeatingTaskOptions {
+  readonly isRegister: boolean
+}
+
+export interface RegisterOptions {
+  readonly onError?: onErrorFunction
+}
+
+export interface onErrorFunction {
+  (error: Error): void
+}
+
+export type TaskID = string
+
 export default class RepeatingTaskManager {
   private dicFn = new Map<TaskID, Function>()
   private dicClearFn = new Map<TaskID, Function>()

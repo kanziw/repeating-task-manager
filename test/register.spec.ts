@@ -1,4 +1,4 @@
-import RepeatingTaskManager, { getDuplicatedTaskKeyError } from '../'
+import RepeatingTaskManager, { getDuplicatedTaskKeyError, RepeatingTaskOptions } from '../'
 import { expect } from 'chai'
 import { delay, onError } from './common'
 
