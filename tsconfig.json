@@ -7,8 +7,13 @@
       "ES2015",
       "DOM"
     ],
+    "rootDir": ".",
+    "outDir": ".",
     "strict": true,
     "sourceMap": true,
     "declaration": true
-  }
+  },
+  "exclude": [ 
+    "node_modules"
+  ]
 }
