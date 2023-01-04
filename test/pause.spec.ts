@@ -15,9 +15,9 @@ describe('[ Pause ]', function () {
     rtm.register(task1, 10, () => { ret.push(task1) }, { onError })
     rtm.register(task2, 10, () => { ret.push(task2) }, { onError })
   })
-  afterEach(() => rtm.clearAll())
+  afterEach(() => { rtm.clearAll() })
 
-  it(`"Pause" pause all tasks /wo params.`, async () => {
+  it('"Pause" pause all tasks /wo params.', async () => {
     rtm.pause()
     const beforeCompletedTasksCount = ret.length
 
@@ -25,7 +25,7 @@ describe('[ Pause ]', function () {
     expect(ret.length).eql(beforeCompletedTasksCount)
   })
 
-  it(`"Pause" pause it's task /w taskId.`, async () => {
+  it('"Pause" pause it\'s task /w taskId.', async () => {
     rtm.pause(task1)
     const beforeCompletedTasksCount = ret.length
 

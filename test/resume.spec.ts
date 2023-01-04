@@ -17,9 +17,9 @@ describe('[ Resume ]', function () {
     rtm.pause()
     ret = []
   })
-  afterEach(() => rtm.clearAll())
+  afterEach(() => { rtm.clearAll() })
 
-  it(`"Resume" resume all tasks /wo params.`, async () => {
+  it('"Resume" resume all tasks /wo params.', async () => {
     rtm.resume()
     await delay(100)
     expect(ret.length).above(0)
@@ -30,7 +30,7 @@ describe('[ Resume ]', function () {
     expect(set.has(task2)).eql(true)
   })
 
-  it(`"Resume" resume it's task /w taskId.`, async () => {
+  it('"Resume" resume it\'s task /w taskId.', async () => {
     rtm.resume(task1)
     await delay(100)
 

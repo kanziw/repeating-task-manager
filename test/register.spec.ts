@@ -1,4 +1,4 @@
-import RepeatingTaskManager, { getDuplicatedTaskKeyError, RepeatingTaskOptions } from '../'
+import RepeatingTaskManager, { RepeatingTaskOptions } from '../'
 import { expect } from 'chai'
 import { delay, onError } from './common'
 
@@ -9,10 +9,10 @@ describe('[ Register ]', function () {
     rtm = new RepeatingTaskManager()
     ret = []
   })
-  afterEach(() => rtm.clearAll())
+  afterEach(() => { rtm.clearAll() })
 
   const task = 'TASK'
-  const taskFn = ({ isRegister }: RepeatingTaskOptions) => { ret.push(isRegister) }
+  const taskFn = ({ isRegister }: RepeatingTaskOptions): void => { ret.push(isRegister) }
 
   it('Nothing happens before register.', async () => {
     await rtm.execute(task)
@@ -27,8 +27,8 @@ describe('[ Register ]', function () {
     await delay(100)
 
     expect(ret.length).above(1)
-    expect(ret[ 0 ]).eql(true)
-    expect(ret.slice(1).every(r => r === false)).eql(true)
+    expect(ret[0]).eql(true)
+    expect(ret.slice(1).every(r => !r)).eql(true)
   })
 
   it('Simple repeating task should work.', async () => {
@@ -41,7 +41,6 @@ describe('[ Register ]', function () {
   it('Can not register /w duplicated task key.', () => {
     rtm.register(task, 10, taskFn, { onError })
 
-    const err = getDuplicatedTaskKeyError(task)
-    expect(() => rtm.register(task, 10, taskFn, { onError })).to.throw(err.message)
+    expect(() => { rtm.register(task, 10, taskFn, { onError }) }).to.throw(`Given task key [${task}] was duplicated.`)
   })
 })
