@@ -64,6 +64,7 @@ typings/
 .idea
 
 # output
-**/*.*js
-**/*.d.ts
-index.d.ts
+*.js
+!.eslintrc.js
+*.mjs
+*.d.ts
