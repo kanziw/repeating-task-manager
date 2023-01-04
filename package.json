@@ -2,15 +2,22 @@
   "name": "repeating-task-manager",
   "version": "1.2.2",
   "description": "Repeating task manager using tail recursion for Node.js",
-  "main": "index.js",
   "engines": {
     "node": ">=0.12.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "nanobundle build --platform=node",
     "pretest": "npm run build",
     "test": "mocha",
     "version": "npm run build"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "require": "./index.js",
+      "import": "./index.mjs"
+    },
+    "./package.json": "./package.json"
   },
   "repository": "git@github.com:kanziw/repeating-task-manager.git",
   "author": "kanziw <kanziwoong@gmail.com>",
@@ -29,6 +36,7 @@
     "@types/mocha": "^8.2.2",
     "chai": "^4.3.4",
     "mocha": "^10.2.0",
+    "nanobundle": "^1.1.0",
     "source-map-support": "^0.5.19",
     "typescript": "^4.2.4"
   }
