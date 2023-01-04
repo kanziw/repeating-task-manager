@@ -1,13 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "target": "ES5",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "lib": [
       "ES2015",
-      "dom"
+      "DOM"
     ],
+    "rootDir": ".",
+    "outDir": ".",
     "strict": true,
     "sourceMap": true,
     "declaration": true
-  }
+  },
+  "exclude": [ 
+    "node_modules"
+  ]
 }

@@ -35,8 +35,8 @@ export default class RepeatingTaskManager {
       if (!this.dicPause.get(taskId)) {
         try {
           await Promise.resolve(taskFunction(options))
-        } catch (ex) {
-          onError(ex)
+        } catch (unknownErr) {
+          onError(unknownErr instanceof Error ? unknownErr : new Error(`${unknownErr}`))
         }
       }
       this.doTaskAfter(taskId, () => repeatTask({ isRegister: false }), interval)

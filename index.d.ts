@@ -10,13 +10,13 @@ export interface RegisterOptions {
 export interface onErrorFunction {
     (error: Error): void;
 }
-export declare type TaskID = string;
+export type TaskID = string;
 export default class RepeatingTaskManager {
     private dicFn;
     private dicClearFn;
     private dicPause;
     register(taskId: TaskID, interval: number, taskFunction: TaskFunction, { onError }?: RegisterOptions): void;
-    execute: (taskId: TaskID, options?: RepeatingTaskOptions | undefined) => Promise<any>;
+    execute: (taskId: TaskID, options?: RepeatingTaskOptions) => Promise<any>;
     clear(taskId: TaskID): void;
     clearAll(): void;
     pause(taskId?: TaskID): void;
