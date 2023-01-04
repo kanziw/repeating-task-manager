@@ -66,3 +66,4 @@ typings/
 # output
 **/*.*js
 **/*.d.ts
+index.d.ts

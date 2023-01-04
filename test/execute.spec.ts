@@ -9,14 +9,14 @@ describe('[ ClearAll ]', function () {
     rtm = new RepeatingTaskManager()
     ret = []
   })
-  afterEach(() => rtm.clearAll())
+  afterEach(() => { rtm.clearAll() })
 
   const task1 = 'TASK1'
   const task2 = 'TASK2'
-  const taskFn1 = () => { ret.push(task1) }
-  const taskFn2 = () => { ret.push(task2) }
+  const taskFn1 = (): void => { ret.push(task1) }
+  const taskFn2 = (): void => { ret.push(task2) }
 
-  it(`Clear should stop it's task.`, async () => {
+  it('Clear should stop it\'s task.', async () => {
     rtm.register(task1, 10, taskFn1, { onError })
     rtm.register(task2, 10, taskFn2, { onError })
     rtm.clear(task1)

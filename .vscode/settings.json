@@ -1,0 +1,6 @@
+{
+  "eslint.packageManager": "npm",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
