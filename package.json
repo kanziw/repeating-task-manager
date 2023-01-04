@@ -5,12 +5,18 @@
   "engines": {
     "node": ">=14"
   },
+  "files": [
+    "index.js",
+    "index.mjs",
+    "index.d.ts"
+  ],
   "scripts": {
     "build": "nanobundle build --platform=node",
     "lint": "eslint index.ts test/*.ts",
     "pretest": "npm run build",
     "test": "mocha",
-    "version": "npm run build"
+    "version": "npm run build",
+    "prepublish": "npm run build"
   },
   "exports": {
     ".": {
